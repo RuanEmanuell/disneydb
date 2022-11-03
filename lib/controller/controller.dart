@@ -15,12 +15,14 @@ abstract class _Controller with Store {
   @observable
   var json;
 
+  @observable
+  var page = 1;
+
   @action
   Future<void> fetchData() async {
-    var response = await http.get(Uri.parse("https://api.disneyapi.dev/characters"));
+    var response = await http.get(Uri.parse("https://api.disneyapi.dev/characters?page=$page"));
 
     if (response.statusCode == 200) {
-      print(response.body);
       json = jsonDecode(response.body);
       loading = false;
     } else {

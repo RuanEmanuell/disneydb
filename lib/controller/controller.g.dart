@@ -39,6 +39,21 @@ mixin _$Controller on _Controller, Store {
     });
   }
 
+  late final _$pageAtom = Atom(name: '_Controller.page', context: context);
+
+  @override
+  int get page {
+    _$pageAtom.reportRead();
+    return super.page;
+  }
+
+  @override
+  set page(int value) {
+    _$pageAtom.reportWrite(value, super.page, () {
+      super.page = value;
+    });
+  }
+
   late final _$fetchDataAsyncAction = AsyncAction('_Controller.fetchData', context: context);
 
   @override
@@ -50,7 +65,8 @@ mixin _$Controller on _Controller, Store {
   String toString() {
     return '''
 loading: ${loading},
-json: ${json}
+json: ${json},
+page: ${page}
     ''';
   }
 }
