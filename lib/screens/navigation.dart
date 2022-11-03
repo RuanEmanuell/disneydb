@@ -35,7 +35,16 @@ class _NavigationScreen extends State<NavigationScreen> {
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(
                           builder: (context) {
-                            return CharacterScreen();
+                            return CharacterScreen(
+                              charName: data.json["data"][index]["name"],
+                              charImage: data.json["data"][index]["imageUrl"],
+                              charFilms: data.json["data"][index]["films"] != []
+                                  ? data.json["data"][index]["films"]
+                                  : "none",
+                              charVideoGames: data.json["data"][index]["videoGames"] != []
+                                  ? data.json["data"][index]["videoGames"]
+                                  : "none",
+                            );
                           },
                         ));
                       },
