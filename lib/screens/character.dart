@@ -18,7 +18,6 @@ class _CharacterScreenState extends State<CharacterScreen> {
   @override
   void initState() {
     super.initState();
-    print(widget.charVideoGames.toString());
     Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
         big = true;
@@ -52,9 +51,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                     bottomRight: Radius.circular(20),
                   ),
                   child: FadeInImage.assetNetwork(
-                      fit: BoxFit.cover,
-                      placeholder: "assets/images/disney.png",
-                      image: widget.charImage),
+                      fit: BoxFit.cover, placeholder: "assets/images/logo.png", image: widget.charImage),
                 ),
               ),
             ),

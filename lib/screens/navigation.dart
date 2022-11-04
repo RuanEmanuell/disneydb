@@ -31,66 +31,77 @@ class _NavigationScreen extends State<NavigationScreen> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                   itemCount: data.json["data"].length,
                   itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return CharacterScreen(
-                              charName: data.json["data"][index]["name"],
-                              charImage: data.json["data"][index]["imageUrl"],
-                              charFilms: data.json["data"][index]["films"] != []
-                                  ? data.json["data"][index]["films"]
-                                  : "none",
-                              charVideoGames: data.json["data"][index]["videoGames"] != []
-                                  ? data.json["data"][index]["videoGames"]
-                                  : "none",
-                            );
-                          },
-                        ));
-                      },
-                      child: Container(
-                        width: screenWidth / 2,
-                        height: screenHeight / 3,
-                        margin: EdgeInsets.all(screenWidth / 50),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.blue, width: 4),
-                        ),
-                        child: Stack(
-                          children: [
-                            SizedBox(
-                                width: screenWidth / 2,
-                                height: screenHeight / 3,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Hero(
-                                    tag: data.json["data"][index]["imageUrl"],
-                                    child: FadeInImage.assetNetwork(
-                                        fit: BoxFit.cover,
-                                        placeholder: "assets/images/disney.png",
-                                        image: data.json["data"][index]["imageUrl"]),
+                    return data.json["data"][index].length == 11
+                        ? InkWell(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (context) {
+                                  return CharacterScreen(
+                                    charName: data.json["data"][index]["name"],
+                                    charImage: data.json["data"][index]["imageUrl"],
+                                    charFilms: data.json["data"][index]["films"] != []
+                                        ? data.json["data"][index]["films"]
+                                        : "none",
+                                    charVideoGames: data.json["data"][index]["videoGames"] != []
+                                        ? data.json["data"][index]["videoGames"]
+                                        : "none",
+                                  );
+                                },
+                              ));
+                            },
+                            child: Container(
+                              width: screenWidth / 2,
+                              height: screenHeight / 3,
+                              margin: EdgeInsets.all(screenWidth / 50),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.blue, width: 4),
+                              ),
+                              child: Stack(
+                                children: [
+                                  SizedBox(
+                                      width: screenWidth / 2,
+                                      height: screenHeight / 3,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Hero(
+                                          tag: data.json["data"][index]["imageUrl"],
+                                          child: FadeInImage.assetNetwork(
+                                              fit: BoxFit.cover,
+                                              placeholder: "assets/images/logo.png",
+                                              image: data.json["data"][index]["imageUrl"]),
+                                        ),
+                                      )),
+                                  Positioned(
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 10,
+                                    child: Center(
+                                      child: Container(
+                                        padding: EdgeInsets.all(screenWidth / 50),
+                                        margin: EdgeInsets.all(screenWidth / 100),
+                                        decoration: BoxDecoration(
+                                            color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+                                        child: Text(data.json["data"][index]["name"],
+                                            style: TextStyle(
+                                                fontSize: screenWidth / 25, color: Colors.white)),
+                                      ),
+                                    ),
                                   ),
-                                )),
-                            Positioned(
-                              left: 0,
-                              right: 0,
-                              bottom: 10,
-                              child: Center(
-                                child: Container(
-                                  padding: EdgeInsets.all(screenWidth / 50),
-                                  margin: EdgeInsets.all(screenWidth / 100),
-                                  decoration: BoxDecoration(
-                                      color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-                                  child: Text(data.json["data"][index]["name"],
-                                      style: TextStyle(fontSize: screenWidth / 25, color: Colors.white)),
-                                ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    );
+                          )
+                        : Container(
+                            width: screenWidth / 2,
+                            height: screenHeight / 3,
+                            margin: EdgeInsets.all(screenWidth / 50),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.blue, width: 4),
+                                image: const DecorationImage(image: AssetImage("assets/images/disney.png"))));
                   },
                 );
         },
