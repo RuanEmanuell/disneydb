@@ -51,7 +51,7 @@ class _NavigationScreen extends State<NavigationScreen> {
                       child: Container(
                         width: screenWidth / 2,
                         height: screenHeight / 3,
-                        margin: const EdgeInsets.all(10),
+                        margin: EdgeInsets.all(screenWidth / 50),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
@@ -78,12 +78,12 @@ class _NavigationScreen extends State<NavigationScreen> {
                               bottom: 10,
                               child: Center(
                                 child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  margin: const EdgeInsets.all(5),
+                                  padding: EdgeInsets.all(screenWidth / 50),
+                                  margin: EdgeInsets.all(screenWidth / 100),
                                   decoration: BoxDecoration(
                                       color: Colors.blue, borderRadius: BorderRadius.circular(10)),
                                   child: Text(data.json["data"][index]["name"],
-                                      style: const TextStyle(color: Colors.white)),
+                                      style: TextStyle(fontSize: screenWidth / 25, color: Colors.white)),
                                 ),
                               ),
                             ),
@@ -105,7 +105,7 @@ class _NavigationScreen extends State<NavigationScreen> {
                 itemCount: data.json["totalPages"],
                 itemBuilder: (context, index) {
                   return Container(
-                    padding: const EdgeInsets.all(5),
+                    padding: EdgeInsets.all(screenWidth / 100),
                     decoration: BoxDecoration(
                         border: Border.all(width: 2, color: const Color.fromARGB(26, 0, 0, 0))),
                     child: TextButton(
@@ -114,7 +114,13 @@ class _NavigationScreen extends State<NavigationScreen> {
                           data.page = index + 1;
                           data.fetchData();
                         },
-                        child: Text("${index + 1}", style: const TextStyle(fontSize: 21))),
+                        child: Text("${index + 1}",
+                            style: TextStyle(
+                                fontSize: screenWidth / 15,
+                                color: data.json["nextPage"] ==
+                                        "https://api.disneyapi.dev/characters?page=${index + 2}"
+                                    ? Colors.black
+                                    : Colors.blue))),
                   );
                 },
               ));
