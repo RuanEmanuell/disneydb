@@ -55,7 +55,7 @@ class _NavigationScreen extends State<NavigationScreen> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.blue, width: 3),
+                          border: Border.all(color: Colors.blue, width: 4),
                         ),
                         child: Stack(
                           children: [
@@ -105,7 +105,9 @@ class _NavigationScreen extends State<NavigationScreen> {
                 itemCount: data.json["totalPages"],
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: const EdgeInsets.only(left: 13.5, right: 13.5),
+                    padding: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 2, color: const Color.fromARGB(26, 0, 0, 0))),
                     child: TextButton(
                         onPressed: () {
                           data.loading = true;
