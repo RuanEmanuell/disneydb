@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
-import "../controller/controller.dart";
+import "../main.dart";
 import "character.dart";
 
-var data = Controller();
+import "../widgets/navigationbar.dart";
+import "../widgets/charbox.dart";
+
 
 class NavigationScreen extends StatefulWidget {
   @override
@@ -22,119 +24,49 @@ class _NavigationScreen extends State<NavigationScreen> {
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(body: Container(
-      child: Observer(
-        builder: (_) {
-          return data.loading
-              ? const Center(child: CircularProgressIndicator(color: Colors.blue))
-              : GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemCount: data.json["data"].length,
-                  itemBuilder: (context, index) {
-                    return data.json["data"][index].length == 11
-                        ? InkWell(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) {
-                                  return CharacterScreen(
-                                    charName: data.json["data"][index]["name"],
-                                    charImage: data.json["data"][index]["imageUrl"],
-                                    charFilms: data.json["data"][index]["films"] != []
-                                        ? data.json["data"][index]["films"]
-                                        : "none",
-                                    charVideoGames: data.json["data"][index]["videoGames"] != []
-                                        ? data.json["data"][index]["videoGames"]
-                                        : "none",
-                                  );
-                                },
-                              ));
-                            },
-                            child: Container(
-                              width: screenWidth / 2,
-                              height: screenHeight / 3,
-                              margin: EdgeInsets.all(screenWidth / 50),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.blue, width: 4),
-                              ),
-                              child: Stack(
-                                children: [
-                                  SizedBox(
-                                      width: screenWidth / 2,
-                                      height: screenHeight / 3,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(15),
-                                        child: Hero(
-                                          tag: data.json["data"][index]["imageUrl"],
-                                          child: FadeInImage.assetNetwork(
-                                              fit: BoxFit.cover,
-                                              placeholder: "assets/images/logo.png",
-                                              image: data.json["data"][index]["imageUrl"]),
-                                        ),
-                                      )),
-                                  Positioned(
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 10,
-                                    child: Center(
-                                      child: Container(
-                                        padding: EdgeInsets.all(screenWidth / 50),
-                                        margin: EdgeInsets.all(screenWidth / 100),
-                                        decoration: BoxDecoration(
-                                            color: Colors.blue, borderRadius: BorderRadius.circular(10)),
-                                        child: Text(data.json["data"][index]["name"],
-                                            style: TextStyle(
-                                                fontSize: screenWidth / 25, color: Colors.white)),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        : Container(
-                            width: screenWidth / 2,
-                            height: screenHeight / 3,
-                            margin: EdgeInsets.all(screenWidth / 50),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.blue, width: 4),
-                                image: const DecorationImage(image: AssetImage("assets/images/disney.png"))));
-                  },
-                );
-        },
-      ),
-    ), bottomNavigationBar: BottomAppBar(child: Observer(builder: (_) {
-      return data.loading
-          ? Container(height: 0)
-          : SizedBox(
-              height: screenHeight / 10,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: data.json["totalPages"],
+    return Scaffold(body: Observer(
+      builder: (_) {
+        return data.loading
+            ? const Center(child: CircularProgressIndicator(color: Colors.blue))
+            : GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                itemCount: data.json["data"].length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.all(screenWidth / 100),
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 2, color: const Color.fromARGB(26, 0, 0, 0))),
-                    child: TextButton(
-                        onPressed: () {
-                          data.loading = true;
-                          data.page = index + 1;
-                          data.fetchData();
-                        },
-                        child: Text("${index + 1}",
-                            style: TextStyle(
-                                fontSize: screenWidth / 15,
-                                color: data.json["nextPage"] ==
-                                        "https://api.disneyapi.dev/characters?page=${index + 2}"
-                                    ? Colors.black
-                                    : Colors.blue))),
-                  );
+                  return data.json["data"][index].length == 11
+                      ? CharWidget(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return CharacterScreen(
+                                  charName: data.json["data"][index]["name"],
+                                  charImage: data.json["data"][index]["imageUrl"],
+                                  charFilms: data.json["data"][index]["films"] != []
+                                      ? data.json["data"][index]["films"]
+                                      : "none",
+                                  charVideoGames: data.json["data"][index]["videoGames"] != []
+                                      ? data.json["data"][index]["videoGames"]
+                                      : "none",
+                                );
+                              },
+                            ));
+                          },
+                          heroImage: data.json["data"][index]["imageUrl"],
+                          name: data.json["data"][index]["name"])
+                      : Container(
+                          width: screenWidth / 2,
+                          height: screenHeight / 3,
+                          margin: EdgeInsets.all(screenWidth / 50),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.blue, width: 4),
+                              image:
+                                  const DecorationImage(image: AssetImage("assets/images/disney.png"))));
                 },
-              ));
+              );
+      },
+    ), bottomNavigationBar: BottomAppBar(child: Observer(builder: (_) {
+      return data.loading ? Container(height: 0) : CustomNavigationBar();
     })));
   }
 }
