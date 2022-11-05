@@ -25,8 +25,6 @@ abstract class _Controller with Store {
     if (response.statusCode == 200) {
       json = jsonDecode(response.body);
       loading = false;
-    } else {
-      debugPrint(response.statusCode.toString());
-    }
+    } 
   }
 }
