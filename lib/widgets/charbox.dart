@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+//The Char Box we have on the navigation screen
+
 class CharWidget extends StatelessWidget {
   var onTap;
   var heroImage;

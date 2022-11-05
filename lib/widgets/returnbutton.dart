@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+//The return button on the character screen
+
 class ReturnButton extends StatelessWidget {
   var visible;
 
@@ -19,7 +21,7 @@ class ReturnButton extends StatelessWidget {
             padding: EdgeInsets.all(screenWidth / 100),
             margin: EdgeInsets.all(screenWidth / 50),
             decoration: BoxDecoration(
-                color: !visible ? Colors.transparent : Colors.blue,
+                color: visible ? Colors.blue : Colors.transparent,
                 border: Border.all(width: 3, color: Colors.white),
                 borderRadius: BorderRadius.circular(50)),
             child: Icon(Icons.arrow_back, size: screenWidth / 7.5, color: Colors.white)),

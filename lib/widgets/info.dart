@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+//The blue baloon info we have on the character screen
+
 class InfoWidget extends StatelessWidget {
   var infoTitle;
   var infoList;

@@ -14,6 +14,7 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class _NavigationScreen extends State<NavigationScreen> {
+  //Taking the api data when you open the app
   @override
   void initState() {
     super.initState();
@@ -65,8 +66,11 @@ class _NavigationScreen extends State<NavigationScreen> {
                 },
               );
       },
-    ), bottomNavigationBar: BottomAppBar(child: Observer(builder: (_) {
-      return data.loading ? Container(height: 0) : CustomNavigationBar();
+    ), 
+    bottomNavigationBar: BottomAppBar(
+      child: Observer(
+        builder: (_) {
+          return data.loading ? Container(height: 0) : CustomNavigationBar();
     })));
   }
 }

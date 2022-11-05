@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+//The big image container we have on the character screen
+
 class ImageContainer extends StatelessWidget {
   var image;
 

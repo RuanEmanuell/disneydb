@@ -2,6 +2,8 @@ import "package:flutter/material.dart";
 
 import "../main.dart";
 
+//The navigation bar on the navigation screen
+
 class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,9 @@ class CustomNavigationBar extends StatelessWidget {
             return Container(
               padding: EdgeInsets.all(screenWidth / 100),
               decoration:
-                  BoxDecoration(border: Border.all(width: 2, color: const Color.fromARGB(26, 0, 0, 0))),
+                  BoxDecoration(
+                    border: Border.all(
+                      width: 2, color: const Color.fromARGB(26, 0, 0, 0))),
               child: TextButton(
                   onPressed: () {
                     data.loading = true;

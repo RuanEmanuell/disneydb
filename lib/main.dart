@@ -4,6 +4,7 @@ import "controller/controller.dart";
 
 import "screens/navigation.dart";
 
+//Defining MobX as the var data
 var data = Controller();
 
 void main() {

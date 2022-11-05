@@ -17,6 +17,8 @@ class CharacterScreen extends StatefulWidget {
 }
 
 class _CharacterScreenState extends State<CharacterScreen> {
+
+  //Little transition on the return button
   bool visible = false;
 
   @override
@@ -34,8 +36,12 @@ class _CharacterScreenState extends State<CharacterScreen> {
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         body: SingleChildScrollView(
-      child: Column(children: [
-        Stack(children: [ImageContainer(image: widget.charImage), ReturnButton(visible: visible)]),
+      child: Column(
+        children: [
+         Stack(
+          children: [
+            ImageContainer(image: widget.charImage), 
+            ReturnButton(visible: visible)]),
         Container(
           margin: EdgeInsets.all(screenWidth / 50),
           child: Text(widget.charName,
